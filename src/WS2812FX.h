@@ -305,6 +305,8 @@ static const __FlashStringHelper* _names[] = {
   FSH(name_59)
 };
 
+uint16_t __attribute__((weak)) ledGetTranslation(uint16_t pos);
+
 class WS2812FX : public Adafruit_NeoPixel {
 
   typedef uint16_t (WS2812FX::*mode_ptr)(void);

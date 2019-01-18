@@ -96,25 +96,25 @@ void WS2812FX::setPixelColor(uint16_t n, uint32_t c) {
     uint8_t r = (c >> 16) & 0xFF;
     uint8_t g = (c >>  8) & 0xFF;
     uint8_t b =  c        & 0xFF;
-    Adafruit_NeoPixel::setPixelColor(n, gamma8(r), gamma8(g), gamma8(b), gamma8(w));
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(r), gamma8(g), gamma8(b), gamma8(w));
   } else {
-    Adafruit_NeoPixel::setPixelColor(n, c);
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), c);
   }
 }
 
 void WS2812FX::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
   if(IS_GAMMA) {
-    Adafruit_NeoPixel::setPixelColor(n, gamma8(r), gamma8(g), gamma8(b));
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(r), gamma8(g), gamma8(b));
   } else {
-    Adafruit_NeoPixel::setPixelColor(n, r, g, b);
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), r, g, b);
   }
 }
 
 void WS2812FX::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
   if(IS_GAMMA) {
-    Adafruit_NeoPixel::setPixelColor(n, gamma8(r), gamma8(g), gamma8(b), gamma8(w));
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(r), gamma8(g), gamma8(b), gamma8(w));
   } else {
-    Adafruit_NeoPixel::setPixelColor(n, r, g, b, w);
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), r, g, b, w);
   }
 }
 
