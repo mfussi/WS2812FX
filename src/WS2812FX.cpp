@@ -91,31 +91,59 @@ void WS2812FX::service() {
 // overload setPixelColor() functions so we can use gamma correction
 // (see https://learn.adafruit.com/led-tricks-gamma-correction/the-issue)
 void WS2812FX::setPixelColor(uint16_t n, uint32_t c) {
+
+  uint8_t w = (c >> 24) & 0xFF;
+  uint8_t r = (c >> 16) & 0xFF;
+  uint8_t g = (c >>  8) & 0xFF;
+  uint8_t b =  c        & 0xFF;
+
+  this->_colorbuffer[0] = r;
+  this->_colorbuffer[1] = g;
+  this->_colorbuffer[2] = b;
+  this->_colorbuffer[3] = w;
+
+  ledColorTranslation(&this->_colorbuffer[0], r, g, b, w)
+
   if(IS_GAMMA) {
-    uint8_t w = (c >> 24) & 0xFF;
-    uint8_t r = (c >> 16) & 0xFF;
-    uint8_t g = (c >>  8) & 0xFF;
-    uint8_t b =  c        & 0xFF;
-    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(r), gamma8(g), gamma8(b), gamma8(w));
+
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(this->_colorbuffer[0]), gamma8(this->_colorbuffer[1]), gamma8(this->_colorbuffer[2]), gamma8(this->colorbuffer[3]));
+
   } else {
-    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), c);
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), this->_colorbuffer[0], this->_colorbuffer[1], this->_colorbuffer[2], this->_colorbuffer[3]);
   }
 }
 
 void WS2812FX::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b) {
+
+  this->_colorbuffer[0] = r;
+  this->_colorbuffer[1] = g;
+  this->_colorbuffer[2] = b;
+  this->_colorbuffer[3] = 0;
+
+  ledColorTranslation(&this->colorbuffer[0], r, g, b, 0)
+
   if(IS_GAMMA) {
-    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(r), gamma8(g), gamma8(b));
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(this->_colorbuffer[0]), gamma8(this->_colorbuffer[1]), gamma8(this->_colorbuffer[2]));
   } else {
-    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), r, g, b);
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), this->_colorbuffer[0], this->_colorbuffer[1], this->_colorbuffer[2]);
   }
 }
 
 void WS2812FX::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b, uint8_t w) {
+
+  this->_colorbuffer[0] = r;
+  this->_colorbuffer[1] = g;
+  this->_colorbuffer[2] = b;
+  this->_colorbuffer[3] = w;
+
+  ledColorTranslation(&this->colorbuffer[0], r, g, b, w)
+
   if(IS_GAMMA) {
-    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(r), gamma8(g), gamma8(b), gamma8(w));
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), gamma8(this->_colorbuffer[0]), gamma8(this->_colorbuffer[1]), gamma8(this->_colorbuffer[2]), gamma8(this->_colorbuffer[3]));
   } else {
-    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), r, g, b, w);
+    Adafruit_NeoPixel::setPixelColor(ledGetTranslation(n), this->_colorbuffer[0], this->_colorbuffer[1], this->_colorbuffer[2], this->_colorbuffer[3]);
   }
+
 }
 
 void WS2812FX::copyPixels(uint16_t dest, uint16_t src, uint16_t count) {

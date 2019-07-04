@@ -306,6 +306,7 @@ static const __FlashStringHelper* _names[] = {
 };
 
 uint16_t __attribute__((weak)) ledGetTranslation(uint16_t pos);
+void __attribute__((weak)) ledColorTranslation(uint8_t* result, uint8_t red, uint8_t green, uint8_t blue, uint8_t white);
 
 class WS2812FX : public Adafruit_NeoPixel {
 
@@ -587,6 +588,7 @@ class WS2812FX : public Adafruit_NeoPixel {
       mode_custom_3(void);
 
   private:
+    uint8_t _colorbuffer[4];
     uint16_t _rand16seed;
     uint16_t (*customModes[MAX_CUSTOM_MODES])(void) {
       []{ return (uint16_t)1000; },
