@@ -1,13 +1,76 @@
 WS2182FX Change Log
 
 
-v1.1.7 changes 12/27/2018
+v1.2.2 changes 9/23/2019
+------------------------
+
+1) Refactored the ws2812fx_segments_web example sketch to allow the use
+	of ArduinoJson v6, and replaced the materialize front-end UI framework
+	with Material Components for the Web (https://material.io/develop/web/),
+	since support for Materialize seems to be fading.
+
+
+v1.2.1 changes 9/12/2019
+------------------------
+
+1) Refactored the ws2812fx_dma example sketch to use the proper NeoPixelBus API.
+
+2) Incorporated chrissicool's suggestion to remove platform restriction for
+	PlatformIO users, as well as some other minor tweaks to library.json.
+	See https://github.com/kitesurfer1404/WS2812FX/pull/186
+
+3) Updates to README.md and WS2812FX Users Guide.md
+
+4) Fixed the comments at the top of the RainbowFireworks.h custom effect
+
+
+v1.2.0 changes 6/11/2019
+------------------------
+
+1) Removed segment reset when changing effect color or speed
+
+2) Updated the fireworks effect to use all three segment colors
+
+3) Added rainbowFireworks custom effect
+
+
+v1.1.9 changes 4/22/2019
+------------------------
+
+1) Added ws2812fx_esp32 example sketch
+
+2) update RUNNING_LIGHTS mode to take SIZE option into account
+
+3) added getNumBytesPerPixel() helper function
+
+
+v1.1.8 changes 3/6/2019
+------------------------
+
+1) Added ArduBadge to README.md
+
+2) Added fade_out(uint32_t) and setColor(uint8_t, uint8_t, uint8_t, uint8_t)
+	functions for more flexibility
+
+3) fixed random16() bug that was causing incorrect results when run on
+	Arduino. See https://github.com/kitesurfer1404/WS2812FX/issues/161
+
+4) Enhancement to ws2812fx_patterns_web example sketch to make it
+	more compatible with ArduinoJson v6. The current production
+	version of ArduinoJson v6 (v6.9.1) works well.
+
+5) Added fillerup custom effect
+
+
+v1.1.7 changes 1/18/2019
 ------------------------
 
 1) Updated the User Guide
 
 2) Updated the ws2812fx_patterns_web example sketch so that it
 	could use version 5 or version 6 of the ArduinoJson library.
+	(as I write this, ArduinoJson v6 is beta software and has some
+	issues, so please stick with v5 if you can)
 
 3) Added another variant of the setSegment() function with this
 	parameter signature:
@@ -27,6 +90,9 @@ v1.1.7 changes 12/27/2018
 	uint32_t tmp = (uint32_t) strtol(&server.arg(i)[0], NULL, 16);
 	which was changed to this:
 	uint32_t tmp = (uint32_t) strtol(server.arg(i).c_str(), NULL, 16);
+
+7) fixed a bug in the ws2812fx_patterns_web example sketch that made
+	it incompatible with LEDfx v1.0.1. Thanks Niklas.
 
 
 v1.1.6 changes 12/14/2018

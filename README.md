@@ -9,7 +9,7 @@ Features
 --------
 
 * 55 different effects. And counting.
-* Tested on Arduino Nano, Uno, Micro and ESP8266.
+* Tested on Arduino Uno/Micro/Nano/Leonardo and ESP8266/ESP32.
 * All effects with printable names - easy to use in user interfaces.
 * FX, speed and brightness controllable on the fly.
 * Ready for sound-to-light (see external trigger example)
@@ -17,6 +17,8 @@ Features
 
 Download, Install and Example
 -----------------------------
+
+[![arduino-library-badge](https://www.ardu-badge.com/badge/WS2812FX.svg)](https://www.ardu-badge.com/WS2812FX)
 
 You can **search for WS2812FX in the Arduino IDE Library Manager** or install the latest (or development) version manually:
 
